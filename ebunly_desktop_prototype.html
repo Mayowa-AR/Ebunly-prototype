@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ebunly — Gift Baskets & Personalised Gifts</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:       #0F0E0C;
+  --dust:      #F7F4EF;
+  --paper:     #FDFCFA;
+  --line:      #E5DFD7;
+  --muted:     #8C887F;
+  --rose:      #C84B6E;
+  --gold:      #C0882A;
+  --teal:      #2E6E69;
+  --serif:     'Fraunces', Georgia, serif;
+  --sans:      'DM Sans', sans-serif;
+  --max:       1320px;
+  --pad:       max(48px, calc((100% - var(--max)) / 2 + 48px));
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--paper); font-family: var(--sans); color: var(--ink); overflow-x: hidden; }
+
+/* ── UTILITY BAR ── */
+.util-bar {
+  background: #EEE9EF;
+  padding: 9px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.util-ticker {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink);
+  animation: tick 20s linear infinite;
+}
+@keyframes tick { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── HEADER SEARCH BAR ── */
+.header-search-bar {
+  background: white;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+}
+.header-search-inner {
+  display: flex; align-items: center;
+  max-width: var(--max); margin: 0 auto; width: 100%;
+  padding: 0 var(--pad);
+}
+.hs-brand {
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  min-width: 220px;
+}
+.hs-hamburger {
+  display: flex; flex-direction: row; align-items: center; gap: 10px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hs-lines {
+  display: flex; flex-direction: column; gap: 5px; flex-shrink: 0;
+}
+.hs-lines span {
+  display: block; width: 22px; height: 2px;
+  background: var(--ink); border-radius: 2px; transition: background 0.2s;
+}
+.hs-cat-label {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  color: var(--ink); letter-spacing: 0.01em;
+}
+.hs-hamburger:hover .hs-lines span { background: var(--rose); }
+.hs-hamburger:hover .hs-cat-label { color: var(--rose); }
+.hs-middle {
+  flex: 1; display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+.hs-right {
+  display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+  min-width: fit-content;
+}
+.hs-search {
+  width: 440px; display: flex; align-items: center; gap: 6px;
+  background: var(--dust); border: 1px solid var(--ink);
+  border-radius: 100px; padding: 11px 16px;
+  cursor: pointer;
+}
+.hs-search:hover { border-color: var(--ink); }
+.hs-search svg { width: 12px; height: 12px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
+.hs-search span { font-size: 13px; font-weight: 300; color: var(--muted); }
+.hs-event-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 11px 18px; border-radius: 8px;
+  background: #F3F0FB;
+  color: #5B3FA8; border: 1px solid #5B3FA8;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  letter-spacing: 0.02em; cursor: pointer; white-space: nowrap;
+  flex-shrink: 0; transition: opacity 0.2s;
+}
+.hs-event-btn:hover { opacity: 0.88; }
+.hs-actions {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+  min-width: 220px; justify-content: flex-end;
+}
+.hs-icon-label {
+  font-size: 10px; font-weight: 500; color: var(--ink); margin-left: 2px;
+}
+
+/* ── MAIN NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: white;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 0 160px;
+  display: flex; align-items: center;
+  justify-content: center;
+  height: 56px; gap: 0;
+  overflow-x: auto; scrollbar-width: none;
+  margin-top: 8px;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav-links {
+  display: flex; align-items: center; gap: 0;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem; font-weight: 800;
+  letter-spacing: -0.02em; color: var(--ink);
+  text-transform: uppercase; flex-shrink: 0;
+  transform: scaleX(1.3); transform-origin: left center;
+  display: inline-block;
+}
+.nav-logo sup {
+  font-family: 'Syne', sans-serif; font-size: 0.45em;
+  font-weight: 600; vertical-align: super; color: var(--rose);
+}
+.nav-links {
+  display: flex; align-items: center; gap: 0;
+  flex: 1;
+}
+.nav-item { position: relative; }
+.nav-item > a {
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  text-decoration: none; padding: 0 16px; height: 52px;
+  display: flex; align-items: center;
+  white-space: nowrap; transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+.nav-item > a:hover,
+.nav-item:hover > a { color: var(--rose); }
+.nav-item.has-mega:hover > a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--rose);
+}
+
+/* Mega menu */
+.mega {
+  position: fixed; left: 0; right: 0;
+  top: 52px;
+  background: white;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  padding: 36px var(--pad);
+  display: none; grid-template-columns: repeat(4, 1fr);
+  gap: 0 48px; z-index: 99;
+}
+.nav-item.has-mega:hover .mega { display: grid; }
+.mega-col {}
+.mega-col-title {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 16px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.mega-link {
+  display: block; font-size: 13px; font-weight: 400;
+  color: var(--ink); text-decoration: none;
+  padding: 7px 0; transition: color 0.15s;
+}
+.mega-link:hover { color: var(--rose); }
+.mega-featured {
+  background: var(--dust); border-radius: 12px;
+  padding: 20px; display: flex; flex-direction: column;
+  justify-content: flex-end; min-height: 160px;
+  position: relative; overflow: hidden;
+}
+.mega-feat-emoji { font-size: 48px; margin-bottom: 12px; }
+.mega-feat-title {
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  color: var(--ink); line-height: 1.3; margin-bottom: 8px;
+}
+.mega-feat-cta {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--rose);
+}
+
+/* Nav right */
+.nav-right {
+  display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+}
+.nav-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--dust); border: 1px solid var(--line);
+  border-radius: 100px; padding: 9px 16px;
+  cursor: pointer; transition: border-color 0.2s;
+  margin-right: 8px;
+}
+.nav-search:hover { border-color: var(--ink); }
+.nav-search svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; }
+.nav-search span { font-size: 13px; color: var(--muted); font-weight: 300; }
+.nav-icon-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.2s; position: relative;
+  background: transparent; border: none;
+  flex-shrink: 0;
+}
+.nav-icon-btn:hover { background: var(--dust); }
+.nav-icon-btn svg { width: 22px; height: 22px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
+.nav-badge {
+  position: absolute; top: 4px; right: 4px;
+  background: var(--rose); color: white;
+  font-size: 9px; font-weight: 700;
+  width: 16px; height: 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── SHARED SECTION ── */
+.section { padding: 56px var(--pad); }
+.section-sm { padding: 40px var(--pad); }
+.sec-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 32px;
+}
+.sec-kicker {
+  font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 6px;
+}
+.sec-title {
+  font-family: var(--serif); font-size: 30px; font-weight: 700;
+  color: var(--ink); line-height: 1.15;
+}
+.sec-title em { font-style: italic; font-weight: 300; color: var(--muted); }
+.view-all {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--ink); text-decoration: none;
+  border-bottom: 1.5px solid var(--ink); padding-bottom: 2px;
+  white-space: nowrap; margin-bottom: 6px;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative; height: 560px; overflow: hidden;
+  background: linear-gradient(120deg, #FDEEF3, #FAE8EE, #F5E6F0);
+  display: flex; align-items: center;
+}
+.hero-bg-emoji {
+  position: absolute; right: var(--pad);
+  top: 50%; transform: translateY(-50%);
+  font-size: 220px; opacity: 0.12; pointer-events: none;
+  line-height: 1;
+}
+.hero-inner {
+  padding: 0 var(--pad);
+  max-width: 560px; position: relative; z-index: 2;
+}
+.hero-kicker {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 16px;
+}
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 5.5vw, 68px);
+  font-weight: 700; line-height: 1.06;
+  color: var(--ink); margin-bottom: 20px;
+}
+.hero-h1 em { font-style: italic; font-weight: 300; color: var(--muted); }
+.hero-desc {
+  font-size: 16px; font-weight: 300; color: var(--muted);
+  line-height: 1.7; margin-bottom: 36px; max-width: 420px;
+}
+.hero-btns { display: flex; gap: 12px; }
+.btn-primary {
+  padding: 14px 30px; border-radius: 8px;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  background: var(--ink); color: white;
+  border: none; cursor: pointer; transition: all 0.2s;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.btn-outline {
+  padding: 13px 24px; border-radius: 8px;
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  color: var(--ink); background: transparent;
+  border: 1px solid var(--line); cursor: pointer; transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--ink); }
+.hero-deco-circle {
+  position: absolute; right: calc(var(--pad) - 60px);
+  top: 50%; transform: translateY(-50%);
+  width: 460px; height: 460px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 180px; z-index: 1;
+}
+/* Slide indicators */
+.hero-slides { position: absolute; inset: 0; }
+.hero-slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center;
+  padding: 0 var(--pad);
+  opacity: 0; transition: opacity 0.7s ease; pointer-events: none;
+}
+.hero-slide.active { opacity: 1; pointer-events: all; }
+.hero-nav {
+  position: absolute; bottom: 32px; left: var(--pad);
+  display: flex; gap: 8px; z-index: 10;
+}
+.h-dot {
+  width: 24px; height: 4px; border-radius: 2px;
+  background: rgba(15,14,12,0.2); cursor: pointer;
+  transition: all 0.3s;
+}
+.h-dot.active { width: 40px; background: var(--ink); }
+
+/* ── OCCASION TILES ── */
+.occ-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 240px;
+  gap: 12px;
+}
+.occ-tile {
+  border-radius: 14px; overflow: hidden; position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 24px; cursor: pointer; transition: transform 0.25s;
+}
+.occ-tile:hover { transform: scale(1.015); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+.occ-tile.tall { grid-row: span 2; }
+.occ-emoji { font-size: 36px; margin-bottom: 10px; }
+.occ-name {
+  font-family: var(--sans); font-size: 16px; font-weight: 700;
+  color: var(--ink); margin-bottom: 3px;
+}
+.occ-sub { font-size: 12px; color: var(--muted); }
+.occ-arr { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+.carousel-arrow-top {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: white; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.carousel-arrow-top:hover { background: #EDE8F7; border-color: #5B3FA8; }
+.carousel-arrow-top:hover svg { stroke: #5B3FA8; }
+.carousel-arrow-top svg { width: 16px; height: 16px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
+
+/* ── CAROUSEL ARROWS ── */
+.carousel-wrap { position: relative; }
+.carousel-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: white; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+.carousel-arrow:hover { background: var(--ink); border-color: var(--ink); }
+.carousel-arrow:hover svg { stroke: white; }
+.carousel-arrow svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
+.carousel-arrow.prev { left: -22px; }
+.carousel-arrow.next { right: -22px; }
+
+/* ── PRODUCT SCROLL ── */
+.prod-scroll-wrap { overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+.prod-scroll-wrap::-webkit-scrollbar { display: none; }
+.prod-scroll { display: flex; gap: 16px; padding: 0 var(--pad); width: max-content; }
+.p-card {
+  width: 220px; flex-shrink: 0; cursor: pointer;
+}
+.p-img {
+  position: relative; border-radius: 12px; overflow: hidden;
+  aspect-ratio: 1/1; margin-bottom: 12px;
+  transition: transform 0.25s;
+}
+.p-card:hover .p-img { transform: scale(1.02); box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+.p-thumb {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+}
+.p-tag {
+  position: absolute; top: 10px; left: 10px;
+  font-size: 8px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 3px 8px;
+  border-radius: 4px; color: white;
+}
+.tag-hot { background: var(--rose); }
+.tag-sale { background: var(--rose); }
+.tag-top { background: var(--gold); }
+.p-wish {
+  position: absolute; top: 10px; right: 10px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: white; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  cursor: pointer; transition: transform 0.2s;
+}
+.p-wish:hover { transform: scale(1.15); }
+.p-wish.active { color: var(--rose); }
+.p-plus {
+  position: absolute; bottom: 10px; right: 10px;
+  width: 32px; height: 32px; border-radius: 7px;
+  background: white; color: var(--ink); border: none;
+  font-size: 20px; font-weight: 300;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  cursor: pointer; transition: transform 0.2s;
+}
+.p-plus:hover { transform: scale(1.1); }
+.p-name {
+  font-size: 14px; font-weight: 500;
+  color: var(--ink); line-height: 1.3; margin-bottom: 6px;
+}
+.p-meta { display: flex; align-items: center; gap: 8px; }
+.p-price { font-size: 14px; font-weight: 700; color: var(--ink); }
+.p-was { font-size: 12px; color: var(--muted); text-decoration: line-through; }
+
+/* ── EDITORIAL BANNER ── */
+.editorial {
+  border-radius: 20px; overflow: hidden;
+  background: linear-gradient(135deg, #C4622D, #A0431A);
+  padding: 40px 40px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  position: relative; min-height: 280px;
+  flex-direction: column; justify-content: flex-end;
+}
+.editorial-deco {
+  position: absolute; right: -60px; top: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.editorial-emoji {
+  position: absolute; top: 28px; right: 32px;
+  font-size: 64px; opacity: 0.35;
+}
+.editorial-content { max-width: 100%; position: relative; z-index: 2; }
+.editorial-kicker {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  margin-bottom: 12px;
+}
+.editorial-title {
+  font-family: var(--serif); font-size: 24px; font-weight: 700;
+  color: white; line-height: 1.25; margin-bottom: 20px;
+}
+.editorial-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px; border-radius: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.2s;
+}
+.editorial-cta:hover { background: rgba(255,255,255,0.2); }
+
+/* ── RECIPIENT ROW ── */
+.rec-grid {
+  display: flex; justify-content: center; gap: 40px;
+  flex-wrap: wrap;
+}
+.rec-card {
+  cursor: pointer; text-align: center;
+  transition: transform 0.2s; flex-shrink: 0;
+}
+.rec-card:hover { transform: translateY(-4px); }
+.rec-card:hover .rec-img { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.rec-img {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px; margin: 0 auto 14px;
+}
+.rec-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.rec-sub { font-size: 11px; color: var(--muted); }
+
+/* ── MILESTONE ── */
+.ms-scroll-wrap {
+  overflow-x: auto; scrollbar-width: none;
+  padding: 0 var(--pad) 8px;
+  margin-top: 0;
+}
+.ms-scroll-wrap::-webkit-scrollbar { display: none; }
+.ms-grid {
+  display: flex; gap: 20px;
+  width: max-content;
+}
+.ms-card { cursor: pointer; transition: transform 0.2s; width: 200px; flex-shrink: 0; }
+.ms-card:hover { transform: translateY(-4px); }
+.ms-card:hover .ms-img { box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
+.ms-img {
+  border-radius: 16px; height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; margin-bottom: 14px;
+}
+.ms-age {
+  font-family: var(--serif); font-size: 72px; font-weight: 900;
+  color: rgba(15,14,12,0.12); line-height: 1;
+  position: absolute; bottom: -8px; right: 8px;
+}
+.ms-emoji { font-size: 48px; position: relative; z-index: 1; }
+.ms-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.ms-sub { font-size: 12px; color: var(--muted); }
+.ms-sub { font-size: 12px; color: var(--muted); }
+
+/* ── BUDGET TILES ── */
+.budget-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.budget-tile {
+  border-radius: 16px; padding: 32px 28px;
+  min-height: 180px; cursor: pointer; position: relative;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border: 1px solid var(--line); background: var(--paper);
+  transition: all 0.2s;
+}
+.budget-tile:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
+.budget-amt {
+  font-family: var(--serif); font-size: 40px; font-weight: 900;
+  color: var(--ink); line-height: 1; margin-bottom: 6px;
+}
+.budget-lbl { font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 20px; }
+.budget-cta {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  padding-bottom: 2px; width: fit-content;
+}
+.budget-ico {
+  position: absolute; bottom: 24px; right: 24px;
+  font-size: 36px; opacity: 0.2;
+}
+.budget-tile.dark {
+  background: var(--ink); border-color: var(--ink);
+}
+.budget-tile.dark .budget-amt,
+.budget-tile.dark .budget-cta { color: white; }
+.budget-tile.dark .budget-lbl { color: rgba(255,255,255,0.45); }
+.budget-tile.dark .budget-cta { border-color: white; }
+.budget-tile.dark .budget-ico { opacity: 0.12; }
+
+/* ── TRUST STRIP ── */
+.trust-strip {
+  background: var(--ink);
+  padding: 56px var(--pad);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+}
+.trust-cell { display: flex; align-items: flex-start; gap: 16px; }
+.trust-ico { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+.trust-text {}
+.trust-title { font-size: 14px; font-weight: 600; color: white; margin-bottom: 5px; }
+.trust-sub { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+/* ── NEWSLETTER ── */
+.newsletter {
+  background: #FAF5F5;
+  padding: 64px 24px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nl-centre {
+  width: 100%; max-width: 560px;
+}
+.nl-title {
+  font-family: var(--sans); font-size: 22px; font-weight: 700;
+  color: var(--ink); margin-bottom: 12px;
+}
+.nl-sub {
+  font-size: 15px; font-weight: 300; color: var(--muted);
+  line-height: 1.6; margin-bottom: 28px;
+}
+.nl-form {
+  display: flex; gap: 12px; justify-content: center; margin-bottom: 16px;
+}
+.nl-input {
+  flex: 1; max-width: 340px; padding: 13px 18px; border-radius: 8px;
+  border: 1px solid var(--line); background: white;
+  font-family: var(--sans); font-size: 14px;
+  outline: none; transition: border-color 0.2s;
+}
+.nl-input:focus { border-color: var(--ink); }
+.nl-btn {
+  padding: 13px 28px; border-radius: 8px;
+  background: #6B4EBB; color: white;
+  font-family: var(--sans); font-size: 14px; font-weight: 600;
+  border: none; cursor: pointer; white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.nl-btn:hover { opacity: 0.88; }
+.nl-privacy {
+  font-size: 11.5px; color: var(--muted); line-height: 1.5;
+}
+
+/* ── TESTIMONIALS ── */
+.test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.t-card {
+  background: var(--dust); border-radius: 16px;
+  padding: 28px; border: 1px solid var(--line);
+  transition: transform 0.2s;
+}
+.t-card:hover { transform: translateY(-3px); }
+.t-stars { font-size: 13px; color: #F59E0B; margin-bottom: 14px; }
+.t-quote {
+  font-family: var(--serif); font-size: 15px; font-style: italic;
+  color: var(--ink); line-height: 1.65; margin-bottom: 20px;
+}
+.t-author { display: flex; align-items: center; gap: 12px; }
+.t-av {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 15px; font-weight: 700;
+  color: white; flex-shrink: 0;
+}
+.t-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.t-occ { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--ink);
+  padding: 64px var(--pad) 40px;
+}
+.footer-top {
+  display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.f-logo {
+  font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
+  letter-spacing: -0.02em; color: white; text-transform: uppercase;
+  margin-bottom: 16px; transform: scaleX(1.3);
+  transform-origin: left center; display: inline-block; line-height: 1;
+}
+.f-logo sup {
+  font-family: 'Syne', sans-serif; font-size: 0.45em;
+  font-weight: 600; vertical-align: super; color: var(--rose);
+}
+.f-about {
+  font-size: 13px; color: rgba(255,255,255,0.45);
+  line-height: 1.7; margin-bottom: 24px; max-width: 260px;
+}
+.f-socials { display: flex; gap: 10px; }
+.f-soc {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.5); font-size: 13px; cursor: pointer;
+  transition: all 0.2s;
+}
+.f-soc:hover { border-color: rgba(255,255,255,0.4); color: white; }
+.f-col-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 20px;
+}
+.f-links { display: flex; flex-direction: column; gap: 12px; }
+.f-links a {
+  font-size: 13px; color: rgba(255,255,255,0.55);
+  text-decoration: none; transition: color 0.2s;
+}
+.f-links a:hover { color: white; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 28px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-bottom p { font-size: 11.5px; color: rgba(255,255,255,0.3); }
+
+/* ── SEARCH OVERLAY ── */
+.search-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15,14,12,0.65);
+  backdrop-filter: blur(6px);
+  z-index: 400; opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 80px;
+}
+.search-overlay.show { opacity: 1; pointer-events: all; }
+.search-box {
+  background: white; border-radius: 20px;
+  width: 640px; box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+.search-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 24px; border-bottom: 1px solid var(--line);
+}
+.search-row svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
+.search-row span { font-size: 16px; font-weight: 300; color: var(--muted); flex: 1; }
+.search-cursor {
+  display: inline-block; width: 1.5px; height: 18px;
+  background: var(--ink); margin-left: 2px;
+  animation: blink 1s step-end infinite; vertical-align: middle;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.search-cancel { font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; flex-shrink: 0; }
+.search-cancel:hover { color: var(--ink); }
+.search-body { padding: 24px; }
+.search-lbl {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
+}
+.search-recents { margin-bottom: 24px; }
+.s-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 0; border-bottom: 1px solid var(--line); cursor: pointer;
+}
+.s-item:last-child { border-bottom: none; }
+.s-ico {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--dust); display: flex; align-items: center;
+  justify-content: center; font-size: 16px; flex-shrink: 0;
+}
+.s-text { font-size: 14px; color: var(--ink); flex: 1; }
+.search-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.s-pill {
+  padding: 8px 16px; border-radius: 100px;
+  border: 0.5px solid var(--ink);
+  font-size: 13px; color: var(--ink);
+  background: var(--dust); cursor: pointer; opacity: 0.7;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 32px; right: 32px;
+  background: var(--ink); color: white;
+  padding: 14px 22px; border-radius: 100px;
+  font-size: 13px; font-weight: 500;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  opacity: 0; transform: translateY(16px);
+  transition: all 0.3s ease; z-index: 500;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast-check { color: #4ADE80; font-size: 15px; }
+
+/* ── GROUP PILL ── */
+.group-pill {
+  position: fixed; bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: white;
+  border: none; border-radius: 100px;
+  padding: 14px 24px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  cursor: pointer; opacity: 0;
+  transition: all 0.4s cubic-bezier(0.32,0.72,0,1);
+  z-index: 199; white-space: nowrap;
+}
+.group-pill.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.pill-close {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; margin-left: 4px; flex-shrink: 0;
+}
+
+/* ── BACK TO TOP ── */
+.back-top {
+  position: fixed; bottom: 32px; right: 32px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--ink); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; cursor: pointer; opacity: 0;
+  transform: translateY(10px); transition: all 0.3s ease; z-index: 200;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.back-top.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="util-bar">
+  <div class="util-ticker">✦ Same-day delivery in Lagos & Abuja ✦ Free gift wrapping on every order ✦ Personalised notes on every order ✦ Same-day delivery in Lagos & Abuja ✦ Free gift wrapping on every order ✦ Personalised notes on every order</div>
+</div>
+
+<!-- HEADER SEARCH BAR -->
+<div class="header-search-bar">
+  <div class="header-search-inner">
+    <div class="hs-brand">
+      <div class="hs-logo">EBUNLY<sup>®</sup></div>
+      <button class="hs-hamburger">
+        <div class="hs-lines"><span></span><span></span><span></span></div>
+        <span class="hs-cat-label">Categories</span>
+      </button>
+    </div>
+    <div class="hs-middle">
+      <div class="hs-search" id="navSearch">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <span>Search gifts, occasions, recipients…</span>
+      </div>
+      <button class="hs-event-btn">🥂 Shopping for an event? <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:#5B3FA8;fill:none;stroke-width:2;stroke-linecap:round;margin-left:2px;flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+    </div>
+    <div class="hs-actions">
+      <button class="nav-icon-btn">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="nav-icon-btn">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </button>
+      <button class="nav-icon-btn" style="position:relative">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="nav-badge">3</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="nav">
+  <div class="nav-links">
+    <div class="nav-item has-mega">
+      <a href="#">Gifts</a>
+      <div class="mega">
+        <div class="mega-col">
+          <div class="mega-col-title">By occasion</div>
+          <a class="mega-link" href="#">Weddings</a>
+          <a class="mega-link" href="#">Birthdays</a>
+          <a class="mega-link" href="#">Baby showers</a>
+          <a class="mega-link" href="#">Anniversaries</a>
+          <a class="mega-link" href="#">Graduations</a>
+          <a class="mega-link" href="#">New home</a>
+        </div>
+        <div class="mega-col">
+          <div class="mega-col-title">By recipient</div>
+          <a class="mega-link" href="#">For Her</a>
+          <a class="mega-link" href="#">For Him</a>
+          <a class="mega-link" href="#">For Mum</a>
+          <a class="mega-link" href="#">For Baby</a>
+          <a class="mega-link" href="#">For Couples</a>
+          <a class="mega-link" href="#">For Friends</a>
+        </div>
+        <div class="mega-col">
+          <div class="mega-col-title">By budget</div>
+          <a class="mega-link" href="#">Under ₦3,000</a>
+          <a class="mega-link" href="#">Under ₦5,000</a>
+          <a class="mega-link" href="#">Under ₦10,000</a>
+          <a class="mega-link" href="#">Luxury (₦10,000+)</a>
+          <br>
+          <div class="mega-col-title" style="margin-top:16px">Trending</div>
+          <a class="mega-link" href="#">Personalised gifts</a>
+          <a class="mega-link" href="#">Top rated gifts</a>
+        </div>
+        <div class="mega-col">
+          <div class="mega-featured">
+            <div class="mega-feat-emoji">🎁</div>
+            <div class="mega-feat-title">Mother's Day is almost here</div>
+            <div class="mega-feat-cta">Shop now →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item has-mega">
+      <a href="#">Weddings</a>
+      <div class="mega">
+        <div class="mega-col">
+          <div class="mega-col-title">Wedding gifts</div>
+          <a class="mega-link" href="#">Wedding gift sets</a>
+          <a class="mega-link" href="#">Personalised gifts</a>
+          <a class="mega-link" href="#">Keepsakes</a>
+          <a class="mega-link" href="#">Gift vouchers</a>
+        </div>
+        <div class="mega-col">
+          <div class="mega-col-title">Wedding day</div>
+          <a class="mega-link" href="#">Favours</a>
+          <a class="mega-link" href="#">Décor</a>
+          <a class="mega-link" href="#">Stationery</a>
+          <a class="mega-link" href="#">Bridesmaid gifts</a>
+        </div>
+        <div class="mega-col"></div>
+        <div class="mega-col">
+          <div class="mega-featured" style="background:linear-gradient(135deg,#EEF8F4,#D4EDE6)">
+            <div class="mega-feat-emoji">💍</div>
+            <div class="mega-feat-title">Gifts & keepsakes</div>
+            <div class="mega-feat-cta">Shop weddings →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item has-mega">
+      <a href="#">Jewellery</a>
+      <div class="mega">
+        <div class="mega-col">
+          <div class="mega-col-title">For her</div>
+          <a class="mega-link" href="#">Necklaces & pendants</a>
+          <a class="mega-link" href="#">Bracelets & bangles</a>
+          <a class="mega-link" href="#">Earrings</a>
+          <a class="mega-link" href="#">Rings</a>
+        </div>
+        <div class="mega-col">
+          <div class="mega-col-title">For him</div>
+          <a class="mega-link" href="#">Cufflinks</a>
+          <a class="mega-link" href="#">Bracelets</a>
+          <a class="mega-link" href="#">Necklaces</a>
+          <a class="mega-link" href="#">Watches</a>
+        </div>
+        <div class="mega-col"></div>
+        <div class="mega-col">
+          <div class="mega-featured" style="background:linear-gradient(135deg,#EDE0F5,#C8A8E0)">
+            <div class="mega-feat-emoji">💎</div>
+            <div class="mega-feat-title">Personalised jewellery</div>
+            <div class="mega-feat-cta">Shop now →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="nav-item has-mega">
+      <a href="#">Fashion & beauty</a>
+      <div class="mega">
+        <div class="mega-col">
+          <div class="mega-col-title">Fashion</div>
+          <a class="mega-link" href="#">Clothing</a>
+          <a class="mega-link" href="#">Bags & accessories</a>
+          <a class="mega-link" href="#">Scarves & hats</a>
+        </div>
+        <div class="mega-col">
+          <div class="mega-col-title">Beauty</div>
+          <a class="mega-link" href="#">Skincare sets</a>
+          <a class="mega-link" href="#">Pamper hampers</a>
+          <a class="mega-link" href="#">Candles & bath</a>
+        </div>
+        <div class="mega-col"></div>
+        <div class="mega-col">
+          <div class="mega-featured" style="background:linear-gradient(135deg,#FAE8EE,#F5C6D0)">
+            <div class="mega-feat-emoji">✨</div>
+            <div class="mega-feat-title">Pamper gift sets</div>
+            <div class="mega-feat-cta">Shop now →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="nav-item has-mega">
+      <a href="#">Games & hobbies</a>
+      <div class="mega">
+        <div class="mega-col">
+          <div class="mega-col-title">Games</div>
+          <a class="mega-link" href="#">Board games</a>
+          <a class="mega-link" href="#">Card games</a>
+          <a class="mega-link" href="#">Outdoor games</a>
+          <a class="mega-link" href="#">Puzzles</a>
+        </div>
+        <div class="mega-col">
+          <div class="mega-col-title">Hobbies</div>
+          <a class="mega-link" href="#">Sports gifts</a>
+          <a class="mega-link" href="#">Craft & art</a>
+          <a class="mega-link" href="#">Music gifts</a>
+        </div>
+        <div class="mega-col"></div>
+        <div class="mega-col">
+          <div class="mega-featured" style="background:linear-gradient(135deg,#E0EEF8,#B8D4E8)">
+            <div class="mega-feat-emoji">🎲</div>
+            <div class="mega-feat-title">Games for everyone</div>
+            <div class="mega-feat-cta">Shop now →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item has-mega">
+      <a href="#">Baby & child</a>
+      <div class="mega">
+        <div class="mega-col">
+          <div class="mega-col-title">Baby gifts</div>
+          <a class="mega-link" href="#">Newborn gifts</a>
+          <a class="mega-link" href="#">Baby shower gifts</a>
+          <a class="mega-link" href="#">Christening gifts</a>
+          <a class="mega-link" href="#">Baby clothing</a>
+        </div>
+        <div class="mega-col">
+          <div class="mega-col-title">Children's gifts</div>
+          <a class="mega-link" href="#">Toys & games</a>
+          <a class="mega-link" href="#">Books</a>
+          <a class="mega-link" href="#">Personalised gifts</a>
+        </div>
+        <div class="mega-col"></div>
+        <div class="mega-col">
+          <div class="mega-featured" style="background:linear-gradient(135deg,#D4E8E0,#8BBCAA)">
+            <div class="mega-feat-emoji">🍼</div>
+            <div class="mega-feat-title">New baby gift sets</div>
+            <div class="mega-feat-cta">Shop now →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <a href="#" style="color:var(--rose); font-weight:600">Offers</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<div class="hero" style="background:linear-gradient(120deg,#FDF6EC,#FAF0DC,#F5E8CC); position:relative; overflow:hidden;">
+  <div class="hero-inner">
+    <div class="hero-kicker">✦ Every occasion</div>
+    <h1 class="hero-h1">Gifts for every<br><em>occasion.</em></h1>
+    <p class="hero-desc">From birthdays to weddings — beautifully wrapped and ready to send.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" style="background:var(--gold)">Shop occasions</button>
+    </div>
+  </div>
+  <div class="hero-deco-circle" style="background:linear-gradient(135deg,#FAF0DC,#F0C878)">🎁</div>
+</div>
+
+
+<!-- OCCASION TILES -->
+<div class="section" style="background:var(--paper)">
+  <div class="sec-head">
+    <div>
+      <div class="sec-kicker">Gift by occasion</div>
+      <div class="sec-title">For every <em>moment</em></div>
+    </div>
+  </div>
+  <div class="occ-grid">
+    <div class="occ-tile" style="background:linear-gradient(135deg,#FDF6EC,#FAF0DC)">
+      <div class="occ-emoji">🤝</div>
+      <div class="occ-name">Corporate Events</div>
+      <div class="occ-sub">Branded & bulk gifting</div>
+    </div>
+    <div class="occ-tile" style="background:linear-gradient(135deg,#EEF8F4,#D4EDE6)">
+      <div class="occ-emoji">💍</div>
+      <div class="occ-name">Weddings</div>
+      <div class="occ-sub">Gifts & keepsakes</div>
+    </div>
+    <div class="occ-tile" style="background:linear-gradient(135deg,#FDE8F0,#F5B8CC)">
+      <div class="occ-emoji">🎊</div>
+      <div class="occ-name">Parties</div>
+      <div class="occ-sub">Celebrate in style</div>
+    </div>
+    <div class="occ-tile" style="background:linear-gradient(135deg,#F3EEF8,#E8DCEF)">
+      <div class="occ-emoji">❤️</div>
+      <div class="occ-name">For Her</div>
+      <div class="occ-sub">Jewellery, beauty & more</div>
+    </div>
+    <div class="occ-tile" style="background:linear-gradient(135deg,#EEF5FD,#D6E8F5)">
+      <div class="occ-emoji">🎂</div>
+      <div class="occ-name">Birthdays</div>
+      <div class="occ-sub">Any age, any budget</div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOP BY RECIPIENT -->
+<div class="section" style="background:var(--paper); border-bottom:1px solid var(--line); padding-top:40px; padding-bottom:40px;">
+  <div class="sec-head">
+    <div>
+      <div class="sec-kicker">Gift by recipient</div>
+      <div class="sec-title">Who are you <em>gifting?</em></div>
+    </div>
+  </div>
+  <div class="rec-grid">
+    <div class="rec-card">
+      <div class="rec-img" style="background:linear-gradient(135deg,#FAE8EE,#F5C6D0)">👩</div>
+      <div class="rec-name">For Her</div>
+      <div class="rec-sub">Jewellery, beauty & more</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-img" style="background:linear-gradient(135deg,#E0EEF8,#B8D4E8)">👨</div>
+      <div class="rec-name">For Him</div>
+      <div class="rec-sub">Stylish & thoughtful</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-img" style="background:linear-gradient(135deg,#FDE8F0,#F5B8CC)">👩‍👧</div>
+      <div class="rec-name">For Mum</div>
+      <div class="rec-sub">She deserves the best</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-img" style="background:linear-gradient(135deg,#D4E8E0,#8BBCAA)">🍼</div>
+      <div class="rec-name">For Baby</div>
+      <div class="rec-sub">Newborn to toddler</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-img" style="background:linear-gradient(135deg,#EDE0F5,#C8A8E0)">💑</div>
+      <div class="rec-name">For Couples</div>
+      <div class="rec-sub">Gifts they'll both love</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-img" style="background:linear-gradient(135deg,#FDF6EC,#F0C878)">👫</div>
+      <div class="rec-name">For Friends</div>
+      <div class="rec-sub">Because they're worth it</div>
+    </div>
+  </div>
+</div>
+
+<!-- BESTSELLERS -->
+<div class="section" style="background:var(--dust); padding-left:0; padding-right:0; border-top:1px solid var(--line)">
+  <div class="sec-head" style="padding:0 var(--pad)">
+    <div>
+      <div class="sec-kicker">Our picks</div>
+      <div class="sec-title">For <em>you</em></div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="carousel-arrow-top" id="prodPrev">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-arrow-top" id="prodNext">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="carousel-wrap">
+    <div class="prod-scroll-wrap" id="prodScroll">
+      <div class="prod-scroll">
+      <div class="p-card">
+        <div class="p-img">
+          <div class="p-thumb" style="background:linear-gradient(135deg,#F5EDE0,#E8D5B0)">👔</div>
+          <span class="p-tag tag-hot">Hot</span>
+          <div class="p-wish active">♥</div>
+          <button class="p-plus" onclick="showToast()">+</button>
+        </div>
+        <div class="p-name">Black Embroidered Shirt</div>
+        <div class="p-meta"><span class="p-price">₦2,500</span></div>
+      </div>
+      <div class="p-card">
+        <div class="p-img">
+          <div class="p-thumb" style="background:linear-gradient(135deg,#F5D5C8,#E0A898)">🎁</div>
+          <span class="p-tag tag-sale">−20%</span>
+          <div class="p-wish">♡</div>
+          <button class="p-plus" onclick="showToast()">+</button>
+        </div>
+        <div class="p-name">Wedding Gift Box</div>
+        <div class="p-meta"><span class="p-price">₦2,800</span><span class="p-was">₦3,500</span></div>
+      </div>
+      <div class="p-card">
+        <div class="p-img">
+          <div class="p-thumb" style="background:linear-gradient(135deg,#E3EEEA,#B8D4C8)">🛁</div>
+          <div class="p-wish">♡</div>
+          <button class="p-plus" onclick="showToast()">+</button>
+        </div>
+        <div class="p-name">Personalized Towel Set</div>
+        <div class="p-meta"><span class="p-price">₦2,500</span></div>
+      </div>
+      <div class="p-card">
+        <div class="p-img">
+          <div class="p-thumb" style="background:linear-gradient(135deg,#FDF0E0,#F0C878)">🧴</div>
+          <span class="p-tag tag-top">Top pick</span>
+          <div class="p-wish">♡</div>
+          <button class="p-plus" onclick="showToast()">+</button>
+        </div>
+        <div class="p-name">Baby Care Bundle</div>
+        <div class="p-meta"><span class="p-price">₦3,500</span></div>
+      </div>
+      <div class="p-card">
+        <div class="p-img">
+          <div class="p-thumb" style="background:linear-gradient(135deg,#EDE0F5,#C8A8E0)">💎</div>
+          <span class="p-tag tag-top">Top pick</span>
+          <div class="p-wish">♡</div>
+          <button class="p-plus" onclick="showToast()">+</button>
+        </div>
+        <div class="p-name">Pearl Jewellery Set</div>
+        <div class="p-meta"><span class="p-price">₦5,200</span></div>
+      </div>
+      <div class="p-card">
+        <div class="p-img">
+          <div class="p-thumb" style="background:linear-gradient(135deg,#D4E8E0,#8BBCAA)">🧸</div>
+          <div class="p-wish">♡</div>
+          <button class="p-plus" onclick="showToast()">+</button>
+        </div>
+        <div class="p-name">Luxury Toy Set</div>
+        <div class="p-meta"><span class="p-price">₦2,800</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDITORIAL BANNER -->
+<div class="section" style="background:var(--paper); border-top:1px solid var(--line)">
+  <div style="display:flex; align-items:flex-start; gap:120px;">
+    <div style="flex-shrink:0; width:clamp(280px, 38%, 566px); position:relative;">
+      <div class="editorial" style="width:100%; margin:0; align-items:center; justify-content:center; text-align:center;">
+        <div class="editorial-deco"></div>
+        <div class="editorial-emoji">👥</div>
+        <div class="editorial-content" style="max-width:100%;">
+          <div class="editorial-kicker">Event gifting</div>
+          <div class="editorial-title">Gifting for events,<br>made effortless.</div>
+        </div>
+      </div>
+      <img
+        src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=566&q=80"
+        sizes="(min-width: 1440px) 566px, (min-width: 768px) 50vw, 100vw"
+        alt="Event gifting"
+        style="
+          position:absolute; inset:0;
+          width:100%; height:100%;
+          object-fit:cover; border-radius:20px;
+          opacity:0.18; pointer-events:none;
+        "
+      >
+    </div>
+    <div style="flex:1; padding-top:60px;">
+      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:700; color:var(--ink); line-height:1.2; margin-bottom:16px;">Plan your event</h2>
+      <p style="font-family:inherit; font-size:1rem; font-weight:300; color:var(--muted); line-height:1.5rem; max-width:520px; margin-bottom:16px;">Not sure of the right gift for your event?</p>
+      <a href="#" style="font-family:inherit; font-size:1rem; font-weight:600; color:#5B3FA8; text-decoration:underline; text-underline-offset:3px;">Get inspired</a>
+    </div>
+  </div>
+</div>
+
+<!-- MILESTONE BIRTHDAYS -->
+<div class="section" style="background:var(--dust); border-top:1px solid var(--line); padding-left:0; padding-right:0;">
+  <div class="sec-head" style="padding:0 var(--pad); margin-bottom:28px;">
+    <div>
+      <div class="sec-kicker">Birthday gifts</div>
+      <div class="sec-title">Milestone <em>moments</em></div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="carousel-arrow-top" id="msPrev">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-arrow-top" id="msNext">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="ms-scroll-wrap" id="msScroll">
+    <div class="ms-grid">
+      <div class="ms-card">
+        <div class="ms-img" style="background:linear-gradient(135deg,#FDE8F0,#F5B8CC)">
+          <div class="ms-age">18</div><div class="ms-emoji">🎉</div>
+        </div>
+        <div class="ms-title">18th Birthday</div>
+        <div class="ms-sub">Coming of age gifts</div>
+      </div>
+      <div class="ms-card">
+        <div class="ms-img" style="background:linear-gradient(135deg,#EDE0F5,#C8A8E0)">
+          <div class="ms-age">21</div><div class="ms-emoji">✨</div>
+        </div>
+        <div class="ms-title">21st Birthday</div>
+        <div class="ms-sub">Make it unforgettable</div>
+      </div>
+      <div class="ms-card">
+        <div class="ms-img" style="background:linear-gradient(135deg,#F5EDE0,#E8D5B0)">
+          <div class="ms-age">30</div><div class="ms-emoji">🥂</div>
+        </div>
+        <div class="ms-title">30th Birthday</div>
+        <div class="ms-sub">The big three-oh</div>
+      </div>
+      <div class="ms-card">
+        <div class="ms-img" style="background:linear-gradient(135deg,#D4E8E0,#8BBCAA)">
+          <div class="ms-age">40</div><div class="ms-emoji">🎊</div>
+        </div>
+        <div class="ms-title">40th Birthday</div>
+        <div class="ms-sub">Curated & elegant</div>
+      </div>
+      <div class="ms-card">
+        <div class="ms-img" style="background:linear-gradient(135deg,#E0EEF8,#B8D4E8)">
+          <div class="ms-age">50</div><div class="ms-emoji">🎖️</div>
+        </div>
+        <div class="ms-title">50th Birthday</div>
+        <div class="ms-sub">Half a century of joy</div>
+      </div>
+      <div class="ms-card">
+        <div class="ms-img" style="background:linear-gradient(135deg,#FAF0DC,#F0D890)">
+          <div class="ms-age">60</div><div class="ms-emoji">👑</div>
+        </div>
+        <div class="ms-title">60th Birthday</div>
+        <div class="ms-sub">Golden & glorious</div>
+      </div>
+      <div class="ms-card">
+        <div class="ms-img" style="background:linear-gradient(135deg,#F0EBF8,#D8C8EE)">
+          <div class="ms-age">70</div><div class="ms-emoji">🌟</div>
+        </div>
+        <div class="ms-title">70th Birthday</div>
+        <div class="ms-sub">A lifetime of memories</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- GIFTS BY BUDGET -->
+<div class="section" style="background:var(--paper); border-top:1px solid var(--line)">
+  <div class="sec-head">
+    <div>
+      <div class="sec-kicker">Gifts by budget</div>
+      <div class="sec-title">Find the perfect gift, <em>at any price</em></div>
+    </div>
+  </div>
+  <div class="budget-grid">
+    <div class="budget-tile">
+      <div>
+        <div class="budget-amt">₦3K</div>
+        <div class="budget-lbl">& under</div>
+        <div class="budget-cta">Shop now →</div>
+      </div>
+      <div class="budget-ico">🎁</div>
+    </div>
+    <div class="budget-tile">
+      <div>
+        <div class="budget-amt">₦5K</div>
+        <div class="budget-lbl">& under</div>
+        <div class="budget-cta">Shop now →</div>
+      </div>
+      <div class="budget-ico">🛍️</div>
+    </div>
+    <div class="budget-tile">
+      <div>
+        <div class="budget-amt">₦10K</div>
+        <div class="budget-lbl">& under</div>
+        <div class="budget-cta">Shop now →</div>
+      </div>
+      <div class="budget-ico">🎀</div>
+    </div>
+    <div class="budget-tile dark">
+      <div>
+        <div class="budget-amt">₦10K+</div>
+        <div class="budget-lbl">& above</div>
+        <div class="budget-cta">Shop now →</div>
+      </div>
+      <div class="budget-ico">👑</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="nl-centre">
+    <div class="nl-title">Stay in the loop</div>
+    <div class="nl-sub">Sign up for sales, discounts and unique gift ideas</div>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="Enter your email address">
+      <button class="nl-btn">Subscribe</button>
+    </div>
+    <div class="nl-privacy">See our <a href="#" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">privacy policy</a> to understand how we process your personal data to send you marketing emails</div>
+  </div>
+</div>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-cell">
+    <div class="trust-ico">🚀</div>
+    <div class="trust-text">
+      <div class="trust-title">Same-day delivery</div>
+      <div class="trust-sub">Lagos & Abuja, 7 days a week</div>
+    </div>
+  </div>
+  <div class="trust-cell">
+    <div class="trust-ico">🎀</div>
+    <div class="trust-text">
+      <div class="trust-title">Gift wrapped always</div>
+      <div class="trust-sub">Every order, beautifully packed</div>
+    </div>
+  </div>
+  <div class="trust-cell">
+    <div class="trust-ico">✍️</div>
+    <div class="trust-text">
+      <div class="trust-title">Handwritten notes</div>
+      <div class="trust-sub">Personal touch on every gift</div>
+    </div>
+  </div>
+  <div class="trust-cell">
+    <div class="trust-ico">🔒</div>
+    <div class="trust-text">
+      <div class="trust-title">Secure checkout</div>
+      <div class="trust-sub">Card payments</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="f-logo">EBUNLY<sup>®</sup></div>
+      <p class="f-about">Making memories last, one thoughtfully curated gift at a time. Based in Lagos, delivering joy nationwide.</p>
+      <div class="f-socials">
+        <div class="f-soc">𝕏</div>
+        <div class="f-soc">in</div>
+        <div class="f-soc">📷</div>
+        <div class="f-soc">▶</div>
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Shop</div>
+      <div class="f-links">
+        <a href="#">All Products</a>
+        <a href="#">Weddings</a>
+        <a href="#">Corporate</a>
+        <a href="#">Baby Gifts</a>
+        <a href="#">For Her</a>
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Company</div>
+      <div class="f-links">
+        <a href="#">About Ebunly</a>
+        <a href="#">Delivery info</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Help</div>
+      <div class="f-links">
+        <a href="#">FAQs</a>
+        <a href="#">Track your order</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact us</a>
+        <a href="#">Privacy policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Ebunly. All rights reserved.</p>
+    <p>Made with ♥ in Lagos</p>
+  </div>
+</footer>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <div class="search-row">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <span>Search gifts, occasions…<span class="search-cursor"></span></span>
+      <span class="search-cancel" id="searchCancel">Cancel</span>
+    </div>
+    <div class="search-body">
+      <div class="search-lbl">Recent searches</div>
+      <div class="search-recents">
+        <div class="s-item"><div class="s-ico">🎁</div><span class="s-text">Wedding gift hamper</span><span style="color:var(--muted)">→</span></div>
+        <div class="s-item"><div class="s-ico">💐</div><span class="s-text">Mother's Day gifts</span><span style="color:var(--muted)">→</span></div>
+        <div class="s-item"><div class="s-ico">🧴</div><span class="s-text">Baby shower set</span><span style="color:var(--muted)">→</span></div>
+        <div class="s-item"><div class="s-ico">🎂</div><span class="s-text">Birthday hamper</span><span style="color:var(--muted)">→</span></div>
+      </div>
+      <div class="search-lbl">Popular right now</div>
+      <div class="search-pills">
+        <div class="s-pill">Luxury gift box</div>
+        <div class="s-pill">For Mum</div>
+        <div class="s-pill">Weddings</div>
+        <div class="s-pill">Corporate</div>
+        <div class="s-pill">Under ₦5,000</div>
+        <div class="s-pill">Personalised</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="toast-check">✓</span> Added to basket</div>
+
+<!-- BACK TO TOP -->
+<div class="back-top" id="backTop">↑</div>
+
+<script>
+  // Product carousel arrows
+  const prodScroll = document.getElementById('prodScroll');
+  const prodPrev = document.getElementById('prodPrev');
+  const prodNext = document.getElementById('prodNext');
+  if (prodScroll && prodPrev && prodNext) {
+    const scrollAmt = 252;
+    prodPrev.addEventListener('click', () => prodScroll.scrollBy({ left: -scrollAmt, behavior: 'smooth' }));
+    prodNext.addEventListener('click', () => prodScroll.scrollBy({ left: scrollAmt, behavior: 'smooth' }));
+  }
+
+  // Milestone carousel arrows
+  const msScroll = document.getElementById('msScroll');
+  const msPrev = document.getElementById('msPrev');
+  const msNext = document.getElementById('msNext');
+  if (msScroll && msPrev && msNext) {
+    const scrollAmt = 236;
+    msPrev.addEventListener('click', () => msScroll.scrollBy({ left: -scrollAmt, behavior: 'smooth' }));
+    msNext.addEventListener('click', () => msScroll.scrollBy({ left: scrollAmt, behavior: 'smooth' }));
+  }
+
+
+  const navSearch = document.getElementById('navSearch');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchCancel = document.getElementById('searchCancel');
+  if (navSearch) navSearch.addEventListener('click', () => searchOverlay.classList.add('show'));
+  if (searchCancel) searchCancel.addEventListener('click', () => searchOverlay.classList.remove('show'));
+  if (searchOverlay) searchOverlay.addEventListener('click', e => { if (e.target.id === 'searchOverlay') searchOverlay.classList.remove('show'); });
+
+  // Toast
+  function showToast() {
+    const t = document.getElementById('toast');
+    if (t) { t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
+  }
+
+  // Group pill
+  const pill = document.getElementById('groupPill');
+  const pillClose = document.getElementById('pillClose');
+  if (pill && pillClose) {
+    let dismissed = false;
+    setTimeout(() => { if (!dismissed) pill.classList.add('show'); }, 500);
+    pillClose.addEventListener('click', e => { e.stopPropagation(); dismissed = true; pill.classList.remove('show'); });
+    pill.addEventListener('click', e => {
+      if (e.target === pillClose) return;
+      dismissed = true; pill.classList.remove('show');
+      const banner = document.querySelector('.editorial');
+      if (banner) banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+
+  // Back to top
+  const bt = document.getElementById('backTop');
+  if (bt) {
+    bt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => bt.classList.toggle('show', window.scrollY > 400));
+  }
+</script>
+</body>
+</html>
